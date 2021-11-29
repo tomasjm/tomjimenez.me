@@ -24,7 +24,7 @@ const SocialNetworks = () => {
       <SocialContainer href="https://linkedin.com/in/tomasjm">
         <FaLinkedin size={72} />
       </SocialContainer>
-      <SocialContainer href="https://instagram.com/tom_jmz">
+      <SocialContainer href="https://instagram.com/tom.jmz9">
         <FaInstagram size={72} />
       </SocialContainer>
       <SocialContainer href="https://twitter.com/TomJimenez05">
