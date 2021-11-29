@@ -7,7 +7,6 @@ interface LinkItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 const LinkItem: React.FC<LinkItemProps> = ({ href, children, label }) => {
   const router = useRouter();
   const isActive = router.asPath == href;
-  console.log(router.asPath, href, isActive);
   return (
     <Link href={href as string}>
       <a
