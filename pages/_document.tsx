@@ -19,8 +19,8 @@ class MyDocument extends Document<Props> {
     return (
       <Html>
         <Head>
-          <link href="/fonts/CalSans-SemiBold.ttf" rel="stylesheet" />
-          <link href="/fonts/Inter-Regular.otf" rel="stylesheet" />
+          <link rel="preload" href="/fonts/CalSans-SemiBold.ttf" as="font" crossOrigin="" />
+          <link rel="preload" href="/fonts/Inter-Regular.otf" as="font" crossOrigin="" />
         </Head>
         <body className="bg-white dark:bg-gray-800 pb-32">
           <Main />
