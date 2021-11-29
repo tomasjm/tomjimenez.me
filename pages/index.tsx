@@ -35,7 +35,7 @@ export default function Home() {
             />
           </div> */}
         </div>
-        <div className="mt-16 w-10/12">
+        <div className="mt-12 w-10/12">
           <Heading>Experiencia</Heading>
           <Text>
             Actualmente me estoy desempeñando como desarrollador fullstack en
