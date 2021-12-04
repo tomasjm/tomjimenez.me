@@ -59,7 +59,7 @@ const CommentsPage = () => {
                   Sign in above with Github to leave a comment! I'll request for
                   email to reply if it is necessary.
                 </Text>
-                <Button className="" onClick={() => signIn("github")}>
+                <Button className="" onClick={() => signIn("github", { callbackUrl: '/comments' })}>
                   Sign in with Github
                 </Button>
               </div>
