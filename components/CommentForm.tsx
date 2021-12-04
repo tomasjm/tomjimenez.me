@@ -22,7 +22,7 @@ const CommentForm = ({ session }) => {
           onChange={(e) => {
             setComment(e.target.value);
           }}
-          label="Your comment:"
+          label="Tu comentario:"
         />
         <Button
           className="w-full"
@@ -31,7 +31,7 @@ const CommentForm = ({ session }) => {
             sendComment();
           }}
         >
-          Leave comment{" "}
+          Dejar comentario{" "}
         </Button>
       </>
     </form>
