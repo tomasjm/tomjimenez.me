@@ -6,7 +6,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
   return (
     <div className="mb-4">
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-gray-700 dark:text-white text-sm font-bold mb-2"
         htmlFor={props.id || props.name}
       >
         {label}
