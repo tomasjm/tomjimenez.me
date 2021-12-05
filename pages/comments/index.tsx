@@ -47,7 +47,8 @@ const CommentsPage = ({ data }) => {
                   <div className="flex flex-col p-3 gap-3">
                     <CommentForm fetchComments={fetchComments} />
                     <Button
-                      className="w-full bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-800"
+                      className="w-full"
+                      secondary
                       onClick={() => signHandler(false)}
                     >
                       Cerrar sesión
