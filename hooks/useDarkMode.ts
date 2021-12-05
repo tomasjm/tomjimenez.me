@@ -4,12 +4,29 @@ type DarkModeHook = () => [string, () => void];
 type ToggleThemeFunction = () => void;
 // Toggle dark mode tailwindcss
 const useDarkMode: DarkModeHook = () => {
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState<string>("");
+  const [mounted, setMounted] = useState<boolean>(false);
   useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove(theme === "light" ? "dark" : "light");
-    root.classList.add(theme);
+    if (mounted) {
+      const root = window.document.documentElement;
+      root.classList.remove(theme === "light" ? "dark" : "light");
+      root.classList.add(theme);
+      localStorage.setItem("theme", theme);
+    }
   }, [theme]);
+  useEffect(() => {
+    getStoredTheme();
+    setMounted(true);
+  }, []);
+
+  const getStoredTheme = () => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+    } else {
+      setTheme("light");
+    }
+  };
   const toggleTheme: ToggleThemeFunction = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };

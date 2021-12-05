@@ -1,22 +1,16 @@
 import format from "date-fns/format";
 
 import Text from "./Text";
-interface CommentProps {
-  text: string;
-  created_at: Date;
-  user: UserCommentProps;
-}
-interface UserCommentProps {
-  name: string;
-  image: string;
-}
+
+import { CommentType } from "../lib/types";
+import React from "react";
 
 const Comment = ({ comment }) => {
   const {
     text,
     created_at,
-    user: { name, image },
-  }: CommentProps = comment;
+    user: { image, name },
+  }: CommentType = comment;
   return (
     <div className="flex flex-row items-center shadow-md dark:shadow dark:bg-gray-900 rounded w-full mb-2">
       <img

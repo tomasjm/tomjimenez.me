@@ -1,18 +1,26 @@
 import Button from "./Button";
 import TextInput from "./TextInput";
-import { useState } from "react";
-const CommentForm = ({ session }) => {
+import React, { useState } from "react";
+import Loader from "./Loader";
+type FetchCommentFunction = () => void;
+interface CommentFormProps {
+  fetchComments: FetchCommentFunction;
+}
+const CommentForm: React.FC<CommentFormProps> = ({ fetchComments }) => {
   const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(false);
   const sendComment = async () => {
-    const res = await fetch("/api/comments", {
+    setLoading(true);
+    await fetch("/api/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: comment }),
     });
-    const data = await res.json();
-    console.log(data);
+    setComment("");
+    fetchComments();
+    setLoading(false);
   };
   return (
     <form action="POST">
@@ -24,15 +32,19 @@ const CommentForm = ({ session }) => {
           }}
           label="Tu comentario:"
         />
-        <Button
-          className="w-full"
-          onClick={(e) => {
-            e.preventDefault();
-            sendComment();
-          }}
-        >
-          Dejar comentario{" "}
-        </Button>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Button
+            className="w-full"
+            onClick={(e) => {
+              e.preventDefault();
+              sendComment();
+            }}
+          >
+            Dejar comentario{" "}
+          </Button>
+        )}
       </>
     </form>
   );

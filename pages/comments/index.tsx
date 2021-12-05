@@ -7,28 +7,17 @@ import Heading from "../../components/Heading";
 import Text from "../../components/Text";
 import { FaGithub } from "react-icons/fa";
 import Loader from "../../components/Loader";
-interface UserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-}
-interface Comment {
-  id: string;
-  user: UserInfo;
-  text: string;
-  created_at: string;
-}
-const CommentsPage = () => {
+import { CommentType } from "../../lib/types";
+import prisma from "../../lib/prisma";
+const CommentsPage = ({ data }) => {
+  const [comments, setComments] = React.useState(data);
   const { data: session, status } = useSession();
-  const [comments, setComments] = React.useState<Comment[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [loadingAuth, setLoadingAuth] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [loadingAuth, setLoadingAuth] = React.useState<boolean>(false);
   const fetchComments = async () => {
     setLoading(true);
     const res = await fetch("/api/comments");
     const comments = await res.json();
-    console.log(comments);
     setComments(comments);
     setLoading(false);
   };
@@ -41,9 +30,6 @@ const CommentsPage = () => {
     }
     setLoadingAuth(false);
   };
-  React.useEffect(() => {
-    fetchComments();
-  }, []);
   return (
     <div>
       <Heading>Comentarios</Heading>
@@ -59,9 +45,9 @@ const CommentsPage = () => {
               <>
                 {session ? (
                   <div className="flex flex-col p-3 gap-3">
-                    <CommentForm session={session} />
+                    <CommentForm fetchComments={fetchComments} />
                     <Button
-                      className="w-full bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
+                      className="w-full bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-800"
                       onClick={() => signHandler(false)}
                     >
                       Cerrar sesión
@@ -92,7 +78,7 @@ const CommentsPage = () => {
         <Loader />
       ) : (
         comments.length > 0 &&
-        comments.map((comment) => (
+        comments.map((comment: CommentType) => (
           <Comment key={comment.id} comment={comment} />
         ))
       )}
@@ -100,3 +86,32 @@ const CommentsPage = () => {
   );
 };
 export default CommentsPage;
+
+export async function getStaticProps() {
+  const comments = await prisma.comment.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  const data = comments.map((comment) => ({
+    id: comment.id.toString(),
+    text: comment.text,
+    created_at: comment.createdAt.toString(),
+    user: {
+      id: comment.user.id.toString(),
+      name: comment.user.name,
+      image: comment.user.image,
+    },
+  }));
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 60,
+  };
+}
