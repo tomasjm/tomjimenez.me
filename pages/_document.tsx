@@ -17,7 +17,7 @@ class MyDocument extends Document<Props> {
 
   render() {
     return (
-      <Html>
+      <Html lang="es">
         <Head>
           <link
             rel="preload"

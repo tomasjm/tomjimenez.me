@@ -50,6 +50,7 @@ const CommentsPage = ({ data }) => {
                       className="w-full"
                       secondary
                       onClick={() => signHandler(false)}
+                      ariaLabel="Botón para cerrar sesión"
                     >
                       Cerrar sesión
                     </Button>
@@ -64,6 +65,7 @@ const CommentsPage = ({ data }) => {
                     <Button
                       className="flex flex-row gap-3 justify-center items-center font-bold"
                       onClick={() => signHandler()}
+                      ariaLabel="Botón para iniciar sesión con Github"
                     >
                       <FaGithub />
                       Ingresar con Github

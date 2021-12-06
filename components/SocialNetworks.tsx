@@ -11,7 +11,9 @@ const SocialContainer = ({
 }: React.PropsWithChildren<{ href: string }>) => {
   return (
     <div className="p-5 mx-3 dark:text-white">
-      <a href={href}>{children}</a>
+      <a aria-label={href} href={href}>
+        {children}
+      </a>
     </div>
   );
 };

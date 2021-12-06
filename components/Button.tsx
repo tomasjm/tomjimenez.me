@@ -1,11 +1,13 @@
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
   secondary?: boolean;
+  ariaLabel: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   secondary,
   children,
+  ariaLabel,
   className,
   ...props
 }) => {
@@ -15,7 +17,11 @@ const Button: React.FC<ButtonProps> = ({
       : "bg-green-500 hover:bg-green-600 text-white dark:bg-purple-700 dark:hover:bg-purple-900"
   } ${className}`;
   return (
-    <button {...props} className={`px-3 py-1 rounded ${customClasses}`}>
+    <button
+      {...props}
+      className={`px-3 py-1 rounded ${customClasses}`}
+      aria-label={ariaLabel}
+    >
       {children}
     </button>
   );

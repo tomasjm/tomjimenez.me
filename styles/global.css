@@ -1,8 +1,10 @@
 @font-face {
   font-family: "Cal Sans";
   src: url("/fonts/CalSans-SemiBold.ttf");
+  font-display: swap;
 }
 @font-face {
   font-family: "Inter";
   src: url("/fonts/Inter-Regular.otf");
+  font-display: swap;
 }

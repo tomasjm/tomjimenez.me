@@ -36,6 +36,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ fetchComments }) => {
           <Loader />
         ) : (
           <Button
+            ariaLabel="Botón de enviar comentario"
             className="w-full"
             onClick={(e) => {
               e.preventDefault();
