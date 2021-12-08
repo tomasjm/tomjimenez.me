@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 interface LinkItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   label?: string;
   ariaLabel?: string;
+  ignoreActive?: boolean;
 }
 
 const LinkItem: React.FC<LinkItemProps> = ({
@@ -10,9 +11,10 @@ const LinkItem: React.FC<LinkItemProps> = ({
   children,
   label,
   ariaLabel,
+  ignoreActive,
 }) => {
   const router = useRouter();
-  const isActive = router.asPath == href;
+  const isActive = ignoreActive || router.pathname === href;
   return (
     <Link href={href as string}>
       <a

@@ -10,3 +10,11 @@ export interface CommentType {
   text: string;
   created_at: string;
 }
+
+export interface BlogPostInfoType {
+  title: string;
+  publishedAt: string;
+  summary: string;
+  image: string;
+  hasCode?: boolean;
+}
